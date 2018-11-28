@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import AppNavigator from './AppNavigator';
 
 export default class App extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Toto</Text>
-      </View>
-    );
+    return <AppNavigator />;
   }
 }
 
