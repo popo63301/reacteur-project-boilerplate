@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, TextInput, View, Text } from 'react-native';
 
-export default class LoginPage extends React.Component {
+export default class SignupPage extends React.Component {
   state = {
     email: '',
     password: ''
@@ -23,7 +23,7 @@ export default class LoginPage extends React.Component {
             alignItems: 'center'
           }}
         >
-          <Text>Login Screen</Text>
+          <Text>Signup Screen</Text>
         </View>
         <View
           style={{
@@ -70,7 +70,7 @@ export default class LoginPage extends React.Component {
               flex: 1
             }}
             onPress={() => this.props.navigation.navigate('FeedPage')}
-            title="Learn More"
+            title="Create an account"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
           />
