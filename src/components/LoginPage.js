@@ -1,11 +1,23 @@
 import React from 'react';
-import { Button, TextInput, View, Text } from 'react-native';
+import { AsyncStorage, Button, TextInput, View, Text } from 'react-native';
 
 export default class LoginPage extends React.Component {
   state = {
     email: '',
     password: ''
   };
+
+  login = () => {
+    const { email, password } = this.state;
+
+    AsyncStorage.getItem(email, (err, result) => {
+      if (password === result) {
+        this.props.navigation.navigate('FeedPage');
+        this.setState({ email: '', password: '' });
+      }
+    });
+  };
+
   render() {
     return (
       <View
@@ -18,7 +30,6 @@ export default class LoginPage extends React.Component {
         <View
           style={{
             flex: 1,
-            // backgroundColor: 'green',
             justifyContent: 'center',
             alignItems: 'center'
           }}
@@ -60,20 +71,31 @@ export default class LoginPage extends React.Component {
         <View
           style={{
             flex: 1,
-            // backgroundColor: 'yellow',
+            flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center'
           }}
         >
-          <Button
+          <View>
+            <Button
+              onPress={this.login}
+              title="Log in"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
+          <View
             style={{
-              flex: 1
+              marginLeft: 30
             }}
-            onPress={() => this.props.navigation.navigate('FeedPage')}
-            title="Learn More"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
+          >
+            <Button
+              onPress={() => this.props.navigation.navigate('SignupPage')}
+              title="Sign up"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
         </View>
       </View>
     );

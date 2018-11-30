@@ -1,10 +1,20 @@
 import React from 'react';
-import { Button, TextInput, View, Text } from 'react-native';
+import { AsyncStorage, Button, TextInput, View, Text } from 'react-native';
 
 export default class SignupPage extends React.Component {
   state = {
     email: '',
     password: ''
+  };
+
+  signup = () => {
+    const { email, password } = this.state;
+
+    if (email.length > 5 && password.length > 5) {
+      AsyncStorage.setItem(email, password, () => {
+        this.props.navigation.navigate('LoginPage');
+      });
+    }
   };
   render() {
     return (
@@ -18,7 +28,6 @@ export default class SignupPage extends React.Component {
         <View
           style={{
             flex: 1,
-            // backgroundColor: 'green',
             justifyContent: 'center',
             alignItems: 'center'
           }}
@@ -60,7 +69,6 @@ export default class SignupPage extends React.Component {
         <View
           style={{
             flex: 1,
-            // backgroundColor: 'yellow',
             justifyContent: 'center',
             alignItems: 'center'
           }}
@@ -69,7 +77,7 @@ export default class SignupPage extends React.Component {
             style={{
               flex: 1
             }}
-            onPress={() => this.props.navigation.navigate('FeedPage')}
+            onPress={this.signup}
             title="Create an account"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
